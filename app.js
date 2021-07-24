@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const methodOverride = require('method-override');
 const campGround = require('./models/campground');
 const app = express();
 
@@ -14,6 +15,7 @@ db.once('open', function () {
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
     res.render('home');
@@ -36,7 +38,22 @@ app.post('/campground', async (req, res) => {
     await campground.save();
     res.redirect(`/campground/${campground._id}`);
 })
+app.get('/campground/:id/edit', async (req, res) => {
+    const { id } = req.params;
+    const campground = await campGround.findById(id);
+    res.render('campgrounds/edit', { campground });
+})
 
+app.put('/campground/:id', async (req, res) => {
+    const { id } = req.params;
+    const campground = await campGround.findByIdAndUpdate(id, req.body.campground);
+    res.redirect(`/campground/${campground._id}`);
+})
+app.delete('/campground/:id', async (req, res) => {
+    const { id } = req.params;
+    const deletecampground = await campGround.findByIdAndDelete(id);
+    res.redirect(`/campground`);
+})
 app.listen(3000, (req, res) => {
     console.log('Listening from port 3000!!!');
 })
