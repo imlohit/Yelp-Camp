@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campgrounds</title>
+</head>
+
+<body>
+    <h1>All campgrounds</h1>
+    <h2><a href="/campground/new">Create new campground</a></h2>
+    <%for(let c of campgrounds){%>
+        <ul>
+            <li><b>Title: </b>
+                <%= c.title %> - <a href="/campground/<%= c._id %> ">
+                        <%= c._id %>
+                    </a>
+
+            </li>
+            <li><b>Location: </b>
+                <%= c.location %>
+            </li>
+        </ul>
+        <%}%>
+
+</body>
+
+</html>
