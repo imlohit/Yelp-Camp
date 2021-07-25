@@ -1,27 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Campground</title>
-</head>
-
-<body>
-    <h1>
-        <%= campgrounds.title %>
-    </h1>
-    <h2>
-        <%= campgrounds.location %>
-    </h2>
-    <a href="/campground">Go back to all campgrounds</a>
-    <a href="/campground/<%= campgrounds._id %>/edit ">Edit the campground</a>
-    <form action="/campground/<%= campgrounds._id %>?_method=DELETE" method="Post">
-        <button>Delete it</button>
-    </form>
-
-
-</body>
-
-</html>
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card mb-3">
+                <img class=" card-img-top" src="<%= campgrounds.image %>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= campgrounds.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= campgrounds.description %>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-muted">
+                        <%= campgrounds.location %>
+                    </li>
+                    <li class="list-group-item">$<%= campgrounds.price %>/night
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <a class="card-link btn btn-info" href="/campground/<%= campgrounds._id %>/edit"
+                        class="card-link">Edit</a>
+                    <form class="d-inline" action="/campground/<%= campgrounds._id %>?_method=DELETE" method="Post">
+                        <button class="btn btn-danger">Delete it</button>
+                    </form>
+                    <a class="btn btn-primary" href="/campground">Go back to all campgrounds</a>
+                </div>
+            </div>
+        </div>
+    </div>
