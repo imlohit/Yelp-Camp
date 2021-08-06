@@ -3,7 +3,8 @@ const router = express.Router();
 const campGround = require("../models/campground");
 const campgrounds = require("../controllers/campgrounds");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
 
 const catchAsync = require("../utils/catchAsync");
 const { isLoggedin, isAuthor, validateCampground } = require("../middleware");
