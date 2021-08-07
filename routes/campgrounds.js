@@ -12,10 +12,12 @@ const { isLoggedin, isAuthor, validateCampground } = require("../middleware");
 router
   .route("/")
   .get(catchAsync(campgrounds.index))
-  .post(upload.array("image"), (req, res) => {
-    console.log(req.body, req.files);
-    res.send("It worked");
-  });
+  .post(
+    isLoggedin,
+    upload.array("image"),
+    validateCampground,
+    catchAsync(campgrounds.createCampground)
+  );
 
 router.get("/new", isLoggedin, campgrounds.renderNewForm);
 
