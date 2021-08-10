@@ -6,6 +6,7 @@ const { places, descriptors } = require("./seedHelpers");
 mongoose.connect("mongodb://localhost:27017/yelpCamp", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -22,6 +23,10 @@ const seedDB = async () => {
       author: "6107af7e8ce71b3524f5a7ef",
       location: `${cities[random1000].city},${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
+      geometry: {
+        type: "Point",
+        coordinates: [-113.1331, 47.0202],
+      },
       images: [
         {
           url: "https://res.cloudinary.com/dj9bnbirn/image/upload/v1628319106/yelpCamp/fwoqd8tynpfrhkgnnh42.jpg",
