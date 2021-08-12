@@ -5,6 +5,7 @@ const map = new mapboxgl.Map({
   center: [-103.5917, 40.6699],
   zoom: 3,
 });
+map.addControl(new mapboxgl.NavigationControl());
 
 map.on("load", () => {
   // Add a new source from our GeoJSON data and
@@ -34,11 +35,11 @@ map.on("load", () => {
       "circle-color": [
         "step",
         ["get", "point_count"],
-        "#39A2DB",
+        "#0096c7",
         100,
-        "#77ACF1",
-        300,
-        "#3EDBF0",
+        "#0077b6",
+        200,
+        "#023e8a",
       ],
       "circle-radius": ["step", ["get", "point_count"], 15, 10, 20, 30, 25],
     },
