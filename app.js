@@ -48,9 +48,7 @@ const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
-app.get("/", (req, res) => {
-  res.send("Welcome to yelpcamp");
-});
+
 app.use(session(sessionConfig));
 app.use(flash());
 app.use(passport.initialize());
@@ -71,6 +69,9 @@ app.use("/campground/:id/reviews", reviewRoutes);
 app.use("/", userRoutes);
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/", (req, res) => {
+  res.render("home");
+});
 app.get("/fakeUser", async (req, res) => {
   const user = await new User({ email: "lohit@gmail.com", username: "Lohit" });
   const newUser = await User.register(user, "monkey");
