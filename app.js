@@ -23,8 +23,7 @@ const User = require("./models/user");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const MongoDBStore = require("connect-mongo")(session);
-const dbUrl = "mongodb://localhost:27017/yelpCamp";
-// process.env.DB_URL;
+const dbUrl = "mongodb://localhost:27017/yelpCamp" || process.env.DB_URL;
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -48,7 +47,7 @@ app.use(
   })
 );
 
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || "thisismysecret";
 
 const store = new MongoDBStore({
   url: dbUrl,
